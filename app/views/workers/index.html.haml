@@ -1,19 +1,19 @@
-%h1 Listing workers
+%h1=t('headers.workers.index')
 
-%table
+%table.table
   %thead
     %tr
-      %th Fn
-      %th Ln
-      %th Sn
-      %th Passport num
-      %th Passport ser
-      %th Birthday
-      %th Post
-      %th Departament
-      %th
-      %th
-      %th
+      %th=Worker.human_attribute_name(:fn)
+      %th=Worker.human_attribute_name(:ln)
+      %th=Worker.human_attribute_name(:sn)
+      %th=Worker.human_attribute_name(:passport_num)
+      %th=Worker.human_attribute_name(:passport_ser)
+      %th=Worker.human_attribute_name(:birthday)
+      %th=Worker.human_attribute_name(:post)
+      %th=Worker.human_attribute_name(:departament)
+      %th.p50
+      %th.p50
+      %th.p50
 
   %tbody
     - @workers.each do |worker|
@@ -26,10 +26,16 @@
         %td= worker.birthday
         %td= worker.post
         %td= worker.departament
-        %td= link_to 'Show', worker
-        %td= link_to 'Edit', edit_worker_path(worker)
-        %td= link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          = link_to worker, class: 'btn btn-success' do
+            = fa_icon :eye
+        %td
+          = link_to edit_worker_path(worker), class: 'btn btn-info' do
+            = fa_icon :edit
+        %td
+          = link_to worker, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
+            = fa_icon :times
 
 %br
 
-= link_to 'New Worker', new_worker_path
+= link_to t('buttons.new.worker'), new_worker_path, class: 'btn btn-primary'

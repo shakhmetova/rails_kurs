@@ -1,7 +1,6 @@
-%h1 Editing project
+%h1= t('headers.projects.edit')
 
 = render 'form'
 
-= link_to 'Show', @project
-\|
-= link_to 'Back', projects_path
+-# = link_to 'Show', @project
+= link_to t('headers.projects.index'), projects_path

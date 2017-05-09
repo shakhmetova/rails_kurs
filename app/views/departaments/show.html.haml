@@ -1,9 +1,8 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @departament.name
+%dl
+  %dt= Departament.human_attribute_name(:name)
+  %dd= @departament.name
 
-= link_to 'Edit', edit_departament_path(@departament)
-\|
-= link_to 'Back', departaments_path
+-# = link_to 'Edit', edit_departament_path(@departament)
+= link_to t('headers.departaments.index'), departaments_path

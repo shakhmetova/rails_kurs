@@ -3,7 +3,7 @@ ru:
     name: Базовое приложение
     company:
       short_name: МПУ
-      department: Кафедра
+      departament: Кафедра
   helpers:
     submit:
       create: Сохранить
@@ -16,9 +16,15 @@ ru:
     confirm:
       user: Действительно удалить пользователя?
       role: Действительно удалить роль?
-    new: 
+      departament: Действительно удалить департамент?
+      worker: Действительно удалить работника?
+      project: Действительно удалить проект?
+    new:
       user: Новый пользователь
       role: Новая роль
+      departament: Новый департамент
+      worker: Новый работник
+      project: Новый проект
   headers:
     users:
       edit: Редактирование пользователя
@@ -28,6 +34,18 @@ ru:
       index: Список возможных ролей пользователей
       edit: Редактирование роли
       new: Новая роль
+    departaments:
+      index: Список департаментов
+      edit: Редактирование департаментов
+      new: Новый департамент
+    workers:
+      index: Список работников
+      edit: Редактирование работника
+      new: Новый работник
+    projects:
+      index: Список проектов
+      edit: Редактирование проекта
+      new: Новый проект
   views:
     pagination:
       first: ⇤
@@ -53,4 +71,22 @@ ru:
         name: Обозначение
         info: Краткое название
         full_info: Описание
-          
+      departament:
+        name: Название
+      project:
+        name: Название
+        date_start: Дата запуска
+        date_finish: Дата окончания
+        price: Цена
+        workers: Работники
+      worker:
+        fn: Имя
+        ln: Фамилия
+        sn: Отчество
+        passport_num: Номер паспорта
+        passport_ser: Серия паспорта
+        birthday: День рождения
+        post: Должность
+        departament: Департамент
+        departament_id: Департамент
+        projects: Проекты

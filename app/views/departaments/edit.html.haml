@@ -1,7 +1,6 @@
-%h1 Editing departament
+%h1= t('headers.departaments.edit')
 
 = render 'form'
 
-= link_to 'Show', @departament
-\|
-= link_to 'Back', departaments_path
+-# = link_to 'Show', @departament
+= link_to t('headers.departaments.index'), departaments_path

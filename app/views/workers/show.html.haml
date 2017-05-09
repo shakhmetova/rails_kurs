@@ -1,30 +1,22 @@
 %p#notice= notice
 
-%p
-  %b Fn:
-  = @worker.fn
-%p
-  %b Ln:
-  = @worker.ln
-%p
-  %b Sn:
-  = @worker.sn
-%p
-  %b Passport num:
-  = @worker.passport_num
-%p
-  %b Passport ser:
-  = @worker.passport_ser
-%p
-  %b Birthday:
-  = @worker.birthday
-%p
-  %b Post:
-  = @worker.post
-%p
-  %b Departament:
-  = @worker.departament
+%dt= Worker.human_attribute_name(:fn)
+%dd= @worker.fn
+%dt= Worker.human_attribute_name(:ln)
+%dd= @worker.ln
+%dt= Worker.human_attribute_name(:sn)
+%dd= @worker.sn
+%dt= Worker.human_attribute_name(:passport_num)
+%dd= @worker.passport_num
+%dt= Worker.human_attribute_name(:passport_ser)
+%dd= @worker.passport_ser
+%dt= Worker.human_attribute_name(:birthday)
+%dd= @worker.birthday
+%dt= Worker.human_attribute_name(:post)
+%dd= @worker.post
+%dt= Worker.human_attribute_name(:departament)
+%dd= @worker.departament.name
 
-= link_to 'Edit', edit_worker_path(@worker)
-\|
-= link_to 'Back', workers_path
+-# = link_to 'Edit', edit_worker_path(@worker)
+
+= link_to t('headers.workers.index'), workers_path

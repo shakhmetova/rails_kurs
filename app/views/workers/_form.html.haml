@@ -32,4 +32,4 @@
     = f.select :departament_id,
     options_for_select(Departament.all.map { |d| [d.name, d.id] } )
   .actions
-    = f.submit 'Save'
+    = f.submit nil, class: 'btn btn-primary'

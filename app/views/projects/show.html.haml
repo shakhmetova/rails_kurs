@@ -1,18 +1,14 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @project.name
-%p
-  %b Date start:
-  = @project.date_start
-%p
-  %b Date finish:
-  = @project.date_finish
-%p
-  %b Price:
-  = @project.price
+%dl
+  %dt= Project.human_attribute_name(:name)
+  %dd= @project.name
+  %dt= Project.human_attribute_name(:date_start)
+  %dd= @project.date_start
+  %dt= Project.human_attribute_name(:date_finish)
+  %dd= @project.date_finish
+  %dt= Project.human_attribute_name(:price)
+  %dd= @project.price
 
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+-# = link_to 'Edit', edit_project_path(@project)
+= link_to t('headers.projects.index'), projects_path
