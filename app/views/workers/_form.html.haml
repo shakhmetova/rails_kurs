@@ -1,0 +1,35 @@
+= form_for @worker do |f|
+  - if @worker.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@worker.errors.count, "error")} prohibited this worker from being saved:"
+      %ul
+        - @worker.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :fn
+    = f.text_field :fn
+  .field
+    = f.label :ln
+    = f.text_field :ln
+  .field
+    = f.label :sn
+    = f.text_field :sn
+  .field
+    = f.label :passport_num
+    = f.text_field :passport_num
+  .field
+    = f.label :passport_ser
+    = f.text_field :passport_ser
+  .field
+    = f.label :birthday
+    = f.date_select :birthday
+  .field
+    = f.label :post
+    = f.text_field :post
+  .field
+    = f.label :departament
+    = f.select :departament_id,
+    options_for_select(Departament.all.map { |d| [d.name, d.id] } )
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Fn:
+  = @worker.fn
+%p
+  %b Ln:
+  = @worker.ln
+%p
+  %b Sn:
+  = @worker.sn
+%p
+  %b Passport num:
+  = @worker.passport_num
+%p
+  %b Passport ser:
+  = @worker.passport_ser
+%p
+  %b Birthday:
+  = @worker.birthday
+%p
+  %b Post:
+  = @worker.post
+%p
+  %b Departament:
+  = @worker.departament
+
+= link_to 'Edit', edit_worker_path(@worker)
+\|
+= link_to 'Back', workers_path

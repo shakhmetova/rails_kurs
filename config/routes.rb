@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :projects
+  resources :workers
+  resources :departaments
   resources :role_users
   resources :roles
   resources :password_resets
