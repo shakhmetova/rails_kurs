@@ -11,4 +11,8 @@ class Worker < ActiveRecord::Base
     allow_blank: true
   validates :ln, length: { minimum: 2 },
     allow_blank: true
+
+  def initials
+    return (fn.first + "\." + sn.first + "\." + ln)
+  end
 end

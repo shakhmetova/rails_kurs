@@ -1,21 +1,41 @@
 %p#notice= notice
 
-%dt= Worker.human_attribute_name(:fn)
-%dd= @worker.fn
-%dt= Worker.human_attribute_name(:ln)
-%dd= @worker.ln
-%dt= Worker.human_attribute_name(:sn)
-%dd= @worker.sn
-%dt= Worker.human_attribute_name(:passport_num)
-%dd= @worker.passport_num
-%dt= Worker.human_attribute_name(:passport_ser)
-%dd= @worker.passport_ser
-%dt= Worker.human_attribute_name(:birthday)
-%dd= @worker.birthday
-%dt= Worker.human_attribute_name(:post)
-%dd= @worker.post
-%dt= Worker.human_attribute_name(:departament)
-%dd= @worker.departament.name
+.row
+  .col-lg-6.col-xs-12
+    .show-block
+      %span.show-block-header= t('activerecord.models.worker')
+      %dl.horizontal
+        %dt= Worker.human_attribute_name(:fn)
+        %dd= @worker.fn
+        %dt= Worker.human_attribute_name(:ln)
+        %dd= @worker.ln
+        %dt= Worker.human_attribute_name(:sn)
+        %dd= @worker.sn
+        %dt= Worker.human_attribute_name(:passport_num)
+        %dd= @worker.passport_num
+        %dt= Worker.human_attribute_name(:passport_ser)
+        %dd= @worker.passport_ser
+        %dt= Worker.human_attribute_name(:birthday)
+        %dd= @worker.birthday
+        %dt= Worker.human_attribute_name(:post)
+        %dd= @worker.post
+        %dt= Worker.human_attribute_name(:departament)
+        %dd= @worker.departament.name
+
+  .col-lg-6.col-xs-12
+    .show-block
+      %span.show-block-header= t('activerecord.attributes.worker.projects')
+      - @worker.projects.each do |project|
+        .assotiations
+          %dl.horizontal
+            %dt= Project.human_attribute_name(:name)
+            %dd= project.name
+            %dt= Project.human_attribute_name(:date_start)
+            %dd= project.date_start
+            %dt= Project.human_attribute_name(:date_finish)
+            %dd= project.date_finish
+            %dt= Project.human_attribute_name(:price)
+            %dd= project.price
 
 -# = link_to 'Edit', edit_worker_path(@worker)
 

@@ -1,6 +1,6 @@
 ru:
   app:
-    name: Базовое приложение
+    name: Научный Исследовательский Институт
     company:
       short_name: МПУ
       departament: Кафедра
@@ -9,6 +9,7 @@ ru:
       create: Сохранить
       submit: Сохранить
       update: Сохранить
+    empty: Не указано
   buttons:
     edit: Редактировать
     destroy: Удалить
@@ -56,6 +57,8 @@ ru:
   activerecord:
     models:
       user: Пользователь
+      project: Проект
+      worker: Работник
     attributes:
       user:
         email: Пользовательское имя/электронная почта

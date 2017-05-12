@@ -1,0 +1,24 @@
+#entries-wrapper
+  display: flex
+  justify-content: space-around
+  flex-wrap: wrap
+  width: 100%
+
+  .entry
+    width: 18%
+    border: 1px solid #7d2e4c
+    padding: 1em
+    margin: 0.5em 0
+
+    ul.entry-links li
+      list-style: none
+      display: inline
+
+    @media (max-width: ($screen-lg + 200))
+      width: 30%
+    @media (max-width: $screen-md)
+      text-align: center
+      width: 45%
+
+    @media (max-width: $screen-sm)
+      width: 90%

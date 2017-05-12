@@ -1,41 +1,40 @@
 %h1=t('headers.workers.index')
 
-%table.table
-  %thead
-    %tr
-      %th=Worker.human_attribute_name(:fn)
-      %th=Worker.human_attribute_name(:ln)
-      %th=Worker.human_attribute_name(:sn)
-      %th=Worker.human_attribute_name(:passport_num)
-      %th=Worker.human_attribute_name(:passport_ser)
-      %th=Worker.human_attribute_name(:birthday)
-      %th=Worker.human_attribute_name(:post)
-      %th=Worker.human_attribute_name(:departament)
-      %th.p50
-      %th.p50
-      %th.p50
-
-  %tbody
-    - @workers.each do |worker|
-      %tr
-        %td= worker.fn
-        %td= worker.ln
-        %td= worker.sn
-        %td= worker.passport_num
-        %td= worker.passport_ser
-        %td= worker.birthday
-        %td= worker.post
-        %td= worker.departament
-        %td
-          = link_to worker, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td
-          = link_to edit_worker_path(worker), class: 'btn btn-info' do
-            = fa_icon :edit
-        %td
-          = link_to worker, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
-            = fa_icon :times
-
-%br
-
 = link_to t('buttons.new.worker'), new_worker_path, class: 'btn btn-primary'
+
+#entries-wrapper
+  - @workers.each do |worker|
+    .entry
+      %dl.horizontal
+        %dt= Worker.human_attribute_name(:fn)
+        %dd= worker.fn
+        %dt= Worker.human_attribute_name(:ln)
+        %dd= worker.ln
+        %dt= Worker.human_attribute_name(:sn)
+        %dd= worker.sn
+        %dt= Worker.human_attribute_name(:passport_num)
+        %dd= worker.passport_num
+        %dt= Worker.human_attribute_name(:passport_ser)
+        %dd= worker.passport_ser
+        %dt= Worker.human_attribute_name(:birthday)
+        %dd= worker.birthday
+        %dt= Worker.human_attribute_name(:post)
+        %dd= worker.post
+        %dt= Worker.human_attribute_name(:departament)
+        %dd= worker.departament.name
+        %dt= Worker.human_attribute_name(:projects)
+        %dd
+          .my-list
+          - worker.projects.each do |project|
+            = project.name + ";"
+
+        %ul.entry-links
+          %li
+            = link_to worker, class: 'btn btn-success' do
+              = fa_icon :eye
+          %li
+            = link_to edit_worker_path(worker), class: 'btn btn-info' do
+              = fa_icon :edit
+          %li
+            = link_to worker, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
+              = fa_icon :times
