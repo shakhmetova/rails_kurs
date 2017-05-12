@@ -1,6 +1,6 @@
 ru:
   app:
-    name: Научный Исследовательский Институт
+    name: НИИ
     company:
       short_name: МПУ
       departament: Кафедра
@@ -47,6 +47,7 @@ ru:
       index: Список проектов
       edit: Редактирование проекта
       new: Новый проект
+      show: Просмотр проекта
   views:
     pagination:
       first: ⇤
@@ -93,3 +94,10 @@ ru:
         departament: Департамент
         departament_id: Департамент
         projects: Проекты
+  breadcrumb:
+    app: НИИ
+    projects: Проекты
+    workers: Работники
+    edit: ред.
+    new: Создание
+    show: Просмотр

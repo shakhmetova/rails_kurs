@@ -1,3 +1,9 @@
+=breadcrumb_tag do
+  %li.active
+    = t('breadcrumb.app')
+  %li
+    = t('breadcrumb.projects')
+
 %h1= t('headers.projects.index')
 
 = link_to t('buttons.new.project'), new_project_path, class: 'btn btn-primary'

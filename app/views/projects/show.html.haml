@@ -1,5 +1,14 @@
+=breadcrumb_tag do
+  %li.active
+    = t('breadcrumb.app')
+  %li.active
+    = link_to t('breadcrumb.projects'), projects_path
+  %li
+    = @project.name
+
 %p#notice= notice
 
+%h1= t('headers.projects.show')
 
 .row
   .col-lg-6.col-xs-12
@@ -38,4 +47,3 @@
             %dd= worker.departament.name
 
 -# = link_to 'Edit', edit_project_path(@project)
-= link_to t('headers.projects.index'), projects_path

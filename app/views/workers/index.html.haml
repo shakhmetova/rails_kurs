@@ -1,3 +1,9 @@
+=breadcrumb_tag do
+  %li.active
+    = t('breadcrumb.app')
+  %li
+    = t('breadcrumb.workers')
+
 %h1=t('headers.workers.index')
 
 = link_to t('buttons.new.worker'), new_worker_path, class: 'btn btn-primary'

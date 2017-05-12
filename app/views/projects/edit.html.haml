@@ -1,6 +1,15 @@
+=breadcrumb_tag do
+  %li.active
+    = t('breadcrumb.app')
+  %li.active
+    = link_to t('breadcrumb.projects'), projects_path
+  %li
+    = link_to @project.name, project_path(@project)
+  %li
+    =t('breadcrumb.edit') + ' ' +  @project.name
+
 %h1= t('headers.projects.edit')
 
 = render 'form'
 
 -# = link_to 'Show', @project
-= link_to t('headers.projects.index'), projects_path

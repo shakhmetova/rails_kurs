@@ -1,3 +1,11 @@
+=breadcrumb_tag do
+  %li.active
+    = t('breadcrumb.app')
+  %li.active
+    = link_to t('breadcrumb.workers'), workers_path(@worker)
+  %li
+    = @worker.ln
+
 %p#notice= notice
 
 .row
@@ -38,5 +46,3 @@
             %dd= project.price
 
 -# = link_to 'Edit', edit_worker_path(@worker)
-
-= link_to t('headers.workers.index'), workers_path
