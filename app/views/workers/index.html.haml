@@ -32,8 +32,10 @@
         %dt= Worker.human_attribute_name(:projects)
         %dd
           .my-list
-          - worker.projects.each do |project|
-            = project.name + ";"
+            - worker.projects.each do |project|
+              = project.name + ";"
+            - if worker.projects.empty?
+              = t("helpers.empty")
 
         %ul.entry-links
           %li
@@ -43,5 +45,7 @@
             = link_to edit_worker_path(worker), class: 'btn btn-info' do
               = fa_icon :edit
           %li
-            = link_to worker, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
+            = link_to worker, method: :delete,
+            data: { confirm: t('buttons.confirm.worker') },
+            class: 'btn btn-danger' do
               = fa_icon :times

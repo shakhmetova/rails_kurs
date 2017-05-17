@@ -1,35 +1,68 @@
 = form_for @worker do |f|
-  - if @worker.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@worker.errors.count, "error")} prohibited this worker from being saved:"
-      %ul
-        - @worker.errors.full_messages.each do |message|
-          %li= message
+  = error_messages_for @worker
 
-  .field
-    = f.label :fn
-    = f.text_field :fn
-  .field
-    = f.label :ln
-    = f.text_field :ln
-  .field
-    = f.label :sn
-    = f.text_field :sn
-  .field
-    = f.label :passport_num
-    = f.text_field :passport_num
-  .field
-    = f.label :passport_ser
-    = f.text_field :passport_ser
-  .field
-    = f.label :birthday
-    = f.date_select :birthday
-  .field
-    = f.label :post
-    = f.text_field :post
-  .field
-    = f.label :departament
-    = f.select :departament_id,
-    options_for_select(Departament.all.map { |d| [d.name, d.id] } )
+  .forms
+    %span.forms-header
+      = t('activerecord.models.worker')
+
+    .forms-body
+      .field
+        = f.label :fn
+        = f.text_field :fn, class: 'form-control'
+      = f.error_messages_for(:fn)
+      .field
+        = f.label :ln
+        = f.text_field :ln, class: 'form-control'
+      = f.error_messages_for(:ln)
+      .field
+        = f.label :sn
+        = f.text_field :sn, class: 'form-control'
+      = f.error_messages_for(:sn)
+      .field
+        = f.label :passport_num
+        = f.text_field :passport_num, class: 'form-control'
+      = f.error_messages_for(:passport_num)
+      .field
+        = f.label :passport_ser
+        = f.text_field :passport_ser, class: 'form-control'
+      = f.error_messages_for(:passport_ser)
+
+      = f.label :birthday
+      .input-group.date.datepicker.field
+        = f.text_field(:birthday, value: lnil(f.object.birthday),
+        class: 'form-control')
+        %span.input-group-addon
+          %span.glyphicon.glyphicon-calendar
+      = f.error_messages_for(:birthday)
+      .field
+        = f.label :post
+        = f.text_field :post, class: 'form-control'
+      = f.error_messages_for(:post)
+
+  .forms
+    %span.forms-header
+      = t('activerecord.attributes.worker.departament')
+    .forms-body
+      = f.collection_select :departament_id, Departament.all, :id, :name,
+      {include_blank: true}, {id: 'select_existing_departament'}
+      = f.fields_for :departament,
+      f.object.departament || f.object.build_departament do |departament|
+        = render 'departament_fields', f: departament
+
+  .forms
+    %span.forms-header
+      = t('activerecord.attributes.worker.projects')
+    .forms-body#projects
+      .forms-body-select
+        = link_to_add_association f, :projects, class: 'btn btn-success',
+        data:{ association_insertion_node: '.forms-body-select',
+        association_insertion_method: :after  } do
+          = fa_icon :plus
+          = t('buttons.add_project')
+        = f.select :projects,
+        options_for_select(Project.all.map { |p| [p.name, p.id] }),
+        {include_blank: true}, {}
+      = f.fields_for :projects do |project|
+        = render 'project_fields', f: project
   .actions
     = f.submit nil, class: 'btn btn-primary'

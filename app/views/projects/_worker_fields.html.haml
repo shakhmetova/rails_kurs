@@ -1,0 +1,35 @@
+.forms-body-assotiation.workers{ class: "workers-#{f.object.try(:id)}" }
+  .field.worker-id
+    = f.hidden_field :id, class: 'form-control'
+  .field.worker-fn
+    = f.label :fn
+    = f.text_field :fn, class: 'form-control'
+  .field.worker-ln
+    = f.label :ln
+    = f.text_field :ln, class: 'form-control'
+  .field.worker-sn
+    = f.label :sn
+    = f.text_field :sn, class: 'form-control'
+  .field.worker-passport_num
+    = f.label :passport_num
+    = f.text_field :passport_num, class: 'form-control'
+  .field.worker-passport_ser
+    = f.label :passport_ser
+    = f.text_field :passport_ser, class: 'form-control'
+
+  = f.label :birthday
+  .input-group.date.datepicker.field.worker-birthday
+    = f.text_field(:birthday, value: lnil(f.object.try(:birthday)),
+    class: 'form-control')
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-calendar
+  .field.worker-post
+    = f.label :post
+    = f.text_field :post, class: 'form-control'
+  .assotiation-links
+    = link_to_remove_association t('buttons.delete'), f,
+    class: 'btn btn-info'
+    - if ( params[:action] == 'edit' && !f.object.id.nil? )
+      = link_to t("buttons.destroy"), f.object, method: :delete,
+      class: 'btn btn-danger', data: { confirm: t('buttons.confirm.worker') },
+      remote: true

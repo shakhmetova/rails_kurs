@@ -24,6 +24,7 @@ class WorkersController < ApplicationController
   # POST /workers
   # POST /workers.json
   def create
+    # raise params.to_s
     @worker = Worker.new(worker_params)
 
     respond_to do |format|
@@ -40,6 +41,7 @@ class WorkersController < ApplicationController
   # PATCH/PUT /workers/1
   # PATCH/PUT /workers/1.json
   def update
+    # raise params.to_s
     respond_to do |format|
       if @worker.update(worker_params)
         format.html { redirect_to @worker, notice: 'Worker was successfully updated.' }
@@ -56,8 +58,30 @@ class WorkersController < ApplicationController
   def destroy
     @worker.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to workers_url, notice: 'Worker was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def departament_fields
+    id = params[:departament_id].to_i
+    if id > 0
+      @departament = Departament.find(id)
+    else
+      @departament = nil
+    end
+    # raise @departament.inspect
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def project_fields
+    id = params[:project_id].to_i
+    @project = Project.find(id)
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -69,6 +93,10 @@ class WorkersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worker_params
-      params.require(:worker).permit(:fn, :ln, :sn, :passport_num, :passport_ser, :birthday, :post, :departament_id)
+      params.require(:worker).permit(:fn, :ln, :sn, :passport_num,
+      :passport_ser, :birthday, :post, :departament_id,
+      :departament_attributes => [:name, :id],
+      :projects_attributes => [:id,
+        :name, :date_start, :date_finish, :price, :_destroy])
     end
 end

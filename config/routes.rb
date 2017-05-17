@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :roles
   resources :password_resets
 
+  post 'departament_fields' => 'workers#departament_fields'
+  post 'project_fields' => 'workers#project_fields'
+  post 'worker_fields' => 'projects#worker_fields'
+
   get 'welcome/index', as: :welcome
   get 'welcome/insufficient_privileges', as: :ip
   get 'login' => 'welcome#new', :as => :login

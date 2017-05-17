@@ -1,0 +1,1 @@
+$('.workers-<%= @worker.id %>').remove()

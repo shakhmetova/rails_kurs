@@ -14,6 +14,7 @@ ru:
     edit: Редактировать
     destroy: Удалить
     show: Показать
+    delete: Отвязать
     confirm:
       user: Действительно удалить пользователя?
       role: Действительно удалить роль?
@@ -26,6 +27,8 @@ ru:
       departament: Новый департамент
       worker: Новый работник
       project: Новый проект
+    add_project: Добавить проект
+    add_worker: Добавить работника
   headers:
     users:
       edit: Редактирование пользователя
@@ -77,7 +80,7 @@ ru:
         info: Краткое название
         full_info: Описание
       departament:
-        name: Название
+        name: Название департамента
       project:
         name: Название
         date_start: Дата запуска

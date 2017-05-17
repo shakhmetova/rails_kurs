@@ -1,0 +1,28 @@
+.forms-body-assotiation.projects{ class: "projects-#{f.object.try(:id)}" }
+  .field.project-id
+    = f.hidden_field :id, class: 'form-control'
+  .field.project-name
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  = f.label :date_start
+  .input-group.date.datepicker.project-date-start
+    = f.text_field(:date_start, class: 'form-control',
+    value: lnil(f.object.date_start) )
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-calendar
+  = f.label :date_start
+  .input-group.date.datepicker.project-date-finish
+    = f.text_field(:date_finish, class: 'form-control',
+    value: lnil(f.object.date_finish) )
+    %span.input-group-addon
+      %span.glyphicon.glyphicon-calendar
+  .field.project-price
+    = f.label :price
+    = f.number_field :price, class: 'form-control'
+  .assotiation-links
+    = link_to_remove_association t('buttons.delete'), f,
+    class: 'btn btn-info'
+    - if ( params[:action] == 'edit' && !f.object.id.nil? )
+      = link_to t("buttons.destroy"), f.object, method: :delete,
+      class: 'btn btn-danger', data: { confirm: t('buttons.confirm.project') },
+      remote: true

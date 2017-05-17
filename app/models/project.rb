@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
   has_and_belongs_to_many :workers
+  accepts_nested_attributes_for :workers,
+      reject_if: :all_blank
 
   validates :name, :date_start, :date_finish, :price, presence: true
   validates :price, numericality: { only_integer: true,

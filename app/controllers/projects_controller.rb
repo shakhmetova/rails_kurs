@@ -56,8 +56,17 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def worker_fields
+    id = params[:worker_id].to_i
+    @worker = Worker.find(id)
+    respond_to do |format|
+      format.js
     end
   end
 
