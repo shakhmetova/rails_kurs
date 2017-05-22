@@ -29,7 +29,7 @@ class WorkersController < ApplicationController
 
     respond_to do |format|
       if @worker.save
-        format.html { redirect_to @worker, notice: 'Worker was successfully created.' }
+        format.html { redirect_to @worker, notice: 'Работник создан.' }
         format.json { render :show, status: :created, location: @worker }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class WorkersController < ApplicationController
     # raise params.to_s
     respond_to do |format|
       if @worker.update(worker_params)
-        format.html { redirect_to @worker, notice: 'Worker was successfully updated.' }
+        format.html { redirect_to @worker, notice: 'Работник обновлен.' }
         format.json { render :show, status: :ok, location: @worker }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class WorkersController < ApplicationController
     @worker.destroy
     respond_to do |format|
       format.js
-      format.html { redirect_to workers_url, notice: 'Worker was successfully destroyed.' }
+      format.html { redirect_to workers_url, notice: 'Работник удален.' }
       format.json { head :no_content }
     end
   end
@@ -80,6 +80,7 @@ class WorkersController < ApplicationController
   def project_fields
     id = params[:project_id].to_i
     @project = Project.find(id)
+    @timestamp = params[:timestamp].to_i
     respond_to do |format|
       format.js
     end
@@ -96,7 +97,7 @@ class WorkersController < ApplicationController
       params.require(:worker).permit(:fn, :ln, :sn, :passport_num,
       :passport_ser, :birthday, :post, :departament_id,
       :departament_attributes => [:name, :id],
-      :projects_attributes => [:id,
-        :name, :date_start, :date_finish, :price, :_destroy])
+      project_worker_relations_attributes: [:_destroy, :project_id, :id,
+        project_attributes: Project.attributes_names.map(&:to_sym).push(:_destroy)])
     end
 end

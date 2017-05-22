@@ -6,27 +6,32 @@
       = t('activerecord.models.worker')
 
     .forms-body
-      .field
-        = f.label :fn
-        = f.text_field :fn, class: 'form-control'
-      = f.error_messages_for(:fn)
-      .field
-        = f.label :ln
-        = f.text_field :ln, class: 'form-control'
-      = f.error_messages_for(:ln)
-      .field
-        = f.label :sn
-        = f.text_field :sn, class: 'form-control'
-      = f.error_messages_for(:sn)
-      .field
-        = f.label :passport_num
-        = f.text_field :passport_num, class: 'form-control'
-      = f.error_messages_for(:passport_num)
-      .field
-        = f.label :passport_ser
-        = f.text_field :passport_ser, class: 'form-control'
-      = f.error_messages_for(:passport_ser)
-
+      .row
+        .col-md-4.field
+          = f.label :fn
+          = f.text_field :fn, class: 'form-control'
+        = f.error_messages_for(:fn)
+        .col-md-4.field
+          = f.label :ln
+          = f.text_field :ln, class: 'form-control'
+        = f.error_messages_for(:ln)
+        .col-md-4.field
+          = f.label :sn
+          = f.text_field :sn, class: 'form-control'
+        = f.error_messages_for(:sn)
+      .row
+        .col-md-4.field
+          = f.label :passport_num
+          = f.text_field :passport_num, class: 'form-control'
+        = f.error_messages_for(:passport_num)
+        .col-md-4.field
+          = f.label :passport_ser
+          = f.text_field :passport_ser, class: 'form-control'
+        = f.error_messages_for(:passport_ser)
+        .col-md-4.field
+          = f.label :post
+          = f.text_field :post, class: 'form-control'
+        = f.error_messages_for(:post)
       = f.label :birthday
       .input-group.date.datepicker.field
         = f.text_field(:birthday, value: lnil(f.object.birthday),
@@ -34,10 +39,6 @@
         %span.input-group-addon
           %span.glyphicon.glyphicon-calendar
       = f.error_messages_for(:birthday)
-      .field
-        = f.label :post
-        = f.text_field :post, class: 'form-control'
-      = f.error_messages_for(:post)
 
   .forms
     %span.forms-header
@@ -54,15 +55,14 @@
       = t('activerecord.attributes.worker.projects')
     .forms-body#projects
       .forms-body-select
-        = link_to_add_association f, :projects, class: 'btn btn-success',
+        = link_to_add_association f, :project_worker_relations,
+        class: 'btn btn-success',
         data:{ association_insertion_node: '.forms-body-select',
         association_insertion_method: :after  } do
           = fa_icon :plus
           = t('buttons.add_project')
-        = f.select :projects,
-        options_for_select(Project.all.map { |p| [p.name, p.id] }),
-        {include_blank: true}, {}
-      = f.fields_for :projects do |project|
-        = render 'project_fields', f: project
+      = f.fields_for :project_worker_relations do |project_worker|
+        = render 'project_worker_relation_fields', f: project_worker
+        
   .actions
     = f.submit nil, class: 'btn btn-primary'

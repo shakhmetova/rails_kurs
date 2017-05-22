@@ -3,24 +3,37 @@ $('.worker-id input').each( ->
   value = $(this).val()
   if !!value
     ids.push(+value) )
-id = "<%= @worker.id %>"
-if ! ids.includes(+id)
-  fn           = "<%= @worker.fn %>"
-  ln           = "<%= @worker.ln %>"
-  sn           = "<%= @worker.sn %>"
-  passport_num = "<%= @worker.passport_num %>"
-  passport_ser = "<%= @worker.passport_ser %>"
-  birthday     = "<%= @worker.birthday %>"
-  post         = "<%= @worker.post %>"
-  console.log(post)
 
-  $('#worker' + id + ' .worker-id input').val( id )
-  $('#worker' + id + ' .worker-fn input').val( fn )
-  $('#worker' + id + ' .worker-ln input').val( ln )
-  $('#worker' + id + ' .worker-sn input').val( sn )
-  $('#worker' + id + ' .worker-passport_num input').val( passport_num )
-  $('#worker' + id + ' .worker-passport_ser input').val( passport_ser )
-  $('#worker' + id + ' .worker-birthday input').val( birthday )
-  $('#worker' + id + ' .worker-post input').val( post )
+id = "<%= @worker.try(:id) %>"
+firstWorker = !ids.includes(+id)
+timestamp = "<%= @timestamp %>"
+worker = ("<%= @worker.nil? %>" == 'false')
+selectorPrefix = "#project_project_worker_relations_attributes_"
 
-console.log("Удача! это сообщение - конечный приемник")
+if worker && firstWorker
+  fn           = "<%= @worker.try(:fn) %>"
+  ln           = "<%= @worker.try(:ln) %>"
+  sn           = "<%= @worker.try(:sn) %>"
+  passport_num = "<%= @worker.try(:passport_num) %>"
+  passport_ser = "<%= @worker.try(:passport_ser) %>"
+  birthday     = "<%= @worker.try(:birthday) %>"
+  post         = "<%= @worker.try(:post) %>"
+else
+  if !firstWorker
+    $(selectorPrefix + timestamp + '_worker_id').val(0)
+  fn           = ""
+  ln           = ""
+  sn           = ""
+  passport_num = ""
+  passport_ser = ""
+  birthday     = ""
+  post         = ""
+
+$(selectorPrefix + timestamp + '_worker_attributes_id').val( id )
+$(selectorPrefix + timestamp + '_worker_attributes_fn').val( fn )
+$(selectorPrefix + timestamp + '_worker_attributes_ln').val( ln )
+$(selectorPrefix + timestamp + '_worker_attributes_sn').val( sn )
+$(selectorPrefix + timestamp + '_worker_attributes_passport_num').val( passport_num )
+$(selectorPrefix + timestamp + '_worker_attributes_passport_ser').val( passport_ser )
+$(selectorPrefix + timestamp + '_worker_attributes_birthday').val( birthday )
+$(selectorPrefix + timestamp + '_worker_attributes_post').val( post )

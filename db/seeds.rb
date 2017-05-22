@@ -40,3 +40,9 @@ p2 = Project.create(name: 'Проект2', date_start: Time.now(),
                     date_finish: Time.now() + 999, price: 300)
 p3 = Project.create(name: 'Проект3', date_start: Time.now(),
                     date_finish: Time.now() + 999, price: 500)
+
+
+w1.projects << p1 << p2
+w3.projects << p3
+w4.projects << p2 << p3
+w5.projects << p1 << p2 << p3

@@ -2,9 +2,12 @@ class Worker < ActiveRecord::Base
   belongs_to :departament
   accepts_nested_attributes_for :departament
 
-  has_and_belongs_to_many :projects
-  accepts_nested_attributes_for :projects, allow_destroy: true,
-      reject_if: :all_blank
+  has_many :project_worker_relations, dependent: :destroy
+  accepts_nested_attributes_for :project_worker_relations,
+  reject_if: proc { |attrs| attrs[:project_id].blank? }, allow_destroy: true
+
+  has_many :projects, through: :project_worker_relations
+
 
   validates :fn, :ln, :passport_num, :passport_ser, :birthday,
     :departament, presence: true
@@ -17,5 +20,9 @@ class Worker < ActiveRecord::Base
 
   def initials
     return (fn.first + "\." + sn.first + "\." + ln)
+  end
+
+  def self.attributes_names
+    self.new.attributes.keys - ['created_at', 'updated_at']
   end
 end

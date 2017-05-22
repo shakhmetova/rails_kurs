@@ -1,0 +1,16 @@
+= form_for @project_worker_relation do |f|
+  - if @project_worker_relation.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@project_worker_relation.errors.count, "error")} prohibited this project_worker_relation from being saved:"
+      %ul
+        - @project_worker_relation.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :project
+    = f.text_field :project
+  .field
+    = f.label :worker
+    = f.text_field :worker
+  .actions
+    = f.submit 'Save'

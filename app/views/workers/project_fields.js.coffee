@@ -3,21 +3,30 @@ $('.project-id input').each( ->
   value = $(this).val()
   if !!value
     ids.push(+value) )
-id = "<%= @project.id %>"
-# console.log("массив:" + ids)
-# console.log("id:" + id)
-# console.log("ids.includes(+id) ? :" + ids.includes(+id))
-if ! ids.includes(+id)
-# console.log(id)
-  name         = "<%= @project.name %>"
-  date_start   = "<%= @project.date_start %>"
-  date_finish  = "<%= @project.date_finish %>"
-  price        = "<%= @project.price %>"
 
-  $('#project' + id + ' .project-id input').val( id )
-  $('#project' + id + ' .project-name input').val( name )
-  $('#project' + id + ' .project-date_start input').val( date_start )
-  $('#project' + id + ' .project-date_finish input').val( date_finish )
-  $('#project' + id + ' .project-price input').val( price )
+id = "<%= @project.try(:id) %>"
+firstProject = !ids.includes(+id)
 
-console.log("Удача! это сообщение - конечный приемник")
+timestamp = "<%= @timestamp %>"
+project = ("<%= @project.nil? %>" == 'false')
+selectorPrefix = "#worker_project_worker_relations_attributes_"
+
+if project && firstProject
+  name         = "<%= @project.try(:name) %>"
+  date_start   = "<%= @project.try(:date_start) %>"
+  date_finish  = "<%= @project.try(:date_finish) %>"
+  price        = "<%= @project.try(:price) %>"
+else
+  if !firstProject
+    $(selectorPrefix + timestamp + '_project_id').val(0)
+  id           = ""
+  name         = ""
+  date_start   = ""
+  date_finish  = ""
+  price        = ""
+
+$(selectorPrefix + timestamp + '_project_attributes_id').val( id )
+$(selectorPrefix + timestamp + '_project_attributes_name').val( name )
+$(selectorPrefix + timestamp + '_project_attributes_date_start').val( date_start )
+$(selectorPrefix + timestamp + '_project_attributes_date_finish').val( date_finish )
+$(selectorPrefix + timestamp + '_project_attributes_price').val( price )

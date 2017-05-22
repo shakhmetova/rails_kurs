@@ -1,0 +1,23 @@
+%h1 Listing project_worker_relations
+
+%table.table
+  %thead
+    %tr
+      %th Project
+      %th Worker
+      %th
+      %th
+      %th
+
+  %tbody
+    - @project_worker_relations.each do |project_worker_relation|
+      %tr
+        %td= project_worker_relation.project.name
+        %td= project_worker_relation.worker.initials
+        %td= link_to 'Show', project_worker_relation
+        %td= link_to 'Edit', edit_project_worker_relation_path(project_worker_relation)
+        %td= link_to 'Destroy', project_worker_relation, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Project worker relation', new_project_worker_relation_path

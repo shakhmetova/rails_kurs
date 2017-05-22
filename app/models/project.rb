@@ -1,7 +1,9 @@
 class Project < ActiveRecord::Base
-  has_and_belongs_to_many :workers
-  accepts_nested_attributes_for :workers,
-      reject_if: :all_blank
+  has_many :project_worker_relations, dependent: :destroy
+  accepts_nested_attributes_for :project_worker_relations,
+  reject_if: proc { |attrs| attrs[:worker_id].blank? }, allow_destroy: true
+  has_many :workers, through: :project_worker_relations
+
 
   validates :name, :date_start, :date_finish, :price, presence: true
   validates :price, numericality: { only_integer: true,
@@ -19,5 +21,7 @@ class Project < ActiveRecord::Base
     end
   end
 
-
+  def self.attributes_names
+    self.new.attributes.keys - ['created_at', 'updated_at']
+  end
 end

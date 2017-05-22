@@ -1,1 +1,1 @@
-$('.projects-<%= @project.id %>').remove()
+$('.project-<%= @project.id %>').remove()

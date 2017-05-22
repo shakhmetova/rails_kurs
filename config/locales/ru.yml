@@ -65,6 +65,11 @@ ru:
       project: Проект
       worker: Работник
     attributes:
+      project_worker_relation:
+        project: Проект
+        project_id: Проект
+        worker: Работник
+        worker_id: Работник
       user:
         email: Пользовательское имя/электронная почта
         birthday: Дата рождения

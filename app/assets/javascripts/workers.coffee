@@ -1,27 +1,20 @@
 datepicker_activation_by_item = (item)->
   item.find('.datepicker').datetimepicker({locale: 'ru', format: 'DD.MM.YYYY'})
 
-fill_project_fields= (e, item) ->
-  console.log(item)
-  id = $("#worker_projects").val()
-  form_id = 'project' + id
-  item.attr('id', form_id)
-  if id
+fill_project_fields = ->
+  $('select[id$=project_id]').on 'change', (e) ->
+    currentProject = $(this).find('option:selected').val()
+    name = $(this).attr('name').match(/attributes]\[(\d+)\]/)
+    timestamp = name[name.length - 1]
     $.ajax
-      url: '/project_fields',
-      type: 'POST',
-      dataType: 'script',
-      data: {
-        project_id: id
-      },
-      error: (jqXHR, textStatus, errorThrown) ->
-        console.log("AJAX Error: #{textStatus}")
-      success: (data, textStatus, jqXHR) ->
-        console.log("AJAX DONE!")
-  else
-    console.log('ajax не понадобился - форма пустая')
+      url: '/project_fields'
+      type: 'POST'
+      dataType: 'script'
+      data: { project_id: currentProject, timestamp: timestamp }
 
 $(document).on 'turbolinks:load', ->
-  $('#projects').on 'cocoon:after-insert', (e, item) ->
+  fill_project_fields();
+  $('#projects').on 'cocoon:after-insert', (event, item) ->
+    $('select[id$=project_id]').off('change')
     datepicker_activation_by_item(item)
-    fill_project_fields(e, item)
+    fill_project_fields()

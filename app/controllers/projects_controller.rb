@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to @project, notice: 'Проект создан.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to @project, notice: 'Проект обновлен.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     respond_to do |format|
       format.js
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'Проект удален.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,7 @@ class ProjectsController < ApplicationController
   def worker_fields
     id = params[:worker_id].to_i
     @worker = Worker.find(id)
+    @timestamp = params[:timestamp].to_i
     respond_to do |format|
       format.js
     end
@@ -78,6 +79,8 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :date_start, :date_finish, :price)
+      params.require(:project).permit(:name, :date_start, :date_finish, :price,
+        project_worker_relations_attributes: [:_destroy, :worker_id, :id,
+          worker_attributes: Worker.attributes_names.map(&:to_sym).push(:_destroy)])
     end
 end

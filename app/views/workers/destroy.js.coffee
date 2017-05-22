@@ -1,1 +1,1 @@
-$('.workers-<%= @worker.id %>').remove()
+$('.worker-<%= @worker.id %>').remove()

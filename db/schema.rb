@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507203208) do
+ActiveRecord::Schema.define(version: 20170522144244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20170507203208) do
 
   add_index "departaments", ["name"], name: "index_departaments_on_name", unique: true, using: :btree
 
+  create_table "project_worker_relations", force: :cascade do |t|
+    t.integer  "project_id", null: false
+    t.integer  "worker_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "project_worker_relations", ["project_id", "worker_id"], name: "index_project_worker_relations_on_project_id_and_worker_id", unique: true, using: :btree
+  add_index "project_worker_relations", ["project_id"], name: "index_project_worker_relations_on_project_id", using: :btree
+  add_index "project_worker_relations", ["worker_id"], name: "index_project_worker_relations_on_worker_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",        null: false
     t.date     "date_start",  null: false
@@ -50,13 +61,6 @@ ActiveRecord::Schema.define(version: 20170507203208) do
   end
 
   add_index "projects", ["name", "date_start"], name: "index_projects_on_name_and_date_start", unique: true, using: :btree
-
-  create_table "projects_workers", id: false, force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "worker_id",  null: false
-  end
-
-  add_index "projects_workers", ["project_id", "worker_id"], name: "index_projects_workers_on_project_id_and_worker_id", unique: true, using: :btree
 
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
@@ -138,6 +142,8 @@ ActiveRecord::Schema.define(version: 20170507203208) do
   add_index "workers", ["departament_id"], name: "index_workers_on_departament_id", using: :btree
   add_index "workers", ["passport_num", "passport_ser"], name: "index_workers_on_passport_num_and_passport_ser", unique: true, using: :btree
 
+  add_foreign_key "project_worker_relations", "projects"
+  add_foreign_key "project_worker_relations", "workers"
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
   add_foreign_key "workers", "departaments"
