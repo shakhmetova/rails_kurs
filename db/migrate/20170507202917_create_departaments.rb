@@ -5,5 +5,7 @@ class CreateDepartaments < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index(:departaments, :name, unique: true)
   end
 end

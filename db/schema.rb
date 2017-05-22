@@ -33,26 +33,30 @@ ActiveRecord::Schema.define(version: 20170507203208) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "departaments", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "departaments", ["name"], name: "index_departaments_on_name", unique: true, using: :btree
+
   create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.date     "date_start"
-    t.date     "date_finish"
-    t.integer  "price"
+    t.string   "name",        null: false
+    t.date     "date_start",  null: false
+    t.date     "date_finish", null: false
+    t.integer  "price",       null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "projects", ["name", "date_start"], name: "index_projects_on_name_and_date_start", unique: true, using: :btree
 
   create_table "projects_workers", id: false, force: :cascade do |t|
     t.integer "project_id", null: false
     t.integer "worker_id",  null: false
   end
 
-  add_index "projects_workers", ["project_id", "worker_id"], name: "index_projects_workers_on_project_id_and_worker_id", using: :btree
+  add_index "projects_workers", ["project_id", "worker_id"], name: "index_projects_workers_on_project_id_and_worker_id", unique: true, using: :btree
 
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
@@ -119,19 +123,20 @@ ActiveRecord::Schema.define(version: 20170507203208) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "workers", force: :cascade do |t|
-    t.string   "fn"
-    t.string   "ln"
+    t.string   "fn",             null: false
+    t.string   "ln",             null: false
     t.string   "sn"
-    t.string   "passport_num"
-    t.string   "passport_ser"
-    t.date     "birthday"
+    t.string   "passport_num",   null: false
+    t.string   "passport_ser",   null: false
+    t.date     "birthday",       null: false
     t.string   "post"
-    t.integer  "departament_id"
+    t.integer  "departament_id", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   add_index "workers", ["departament_id"], name: "index_workers_on_departament_id", using: :btree
+  add_index "workers", ["passport_num", "passport_ser"], name: "index_workers_on_passport_num_and_passport_ser", unique: true, using: :btree
 
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
