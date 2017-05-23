@@ -1,5 +1,6 @@
 class WorkersController < ApplicationController
   before_action :set_worker, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin', 'operator')}, except: [:show, :index]
 
   # GET /workers
   # GET /workers.json

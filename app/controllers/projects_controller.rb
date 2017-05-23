@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin', 'operator')}, except: [:show, :index]
 
   # GET /projects
   # GET /projects.json

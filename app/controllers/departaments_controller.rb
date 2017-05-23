@@ -1,5 +1,6 @@
 class DepartamentsController < ApplicationController
   before_action :set_departament, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin')}
 
   # GET /departaments
   # GET /departaments.json

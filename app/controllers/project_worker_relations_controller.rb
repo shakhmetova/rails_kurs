@@ -1,5 +1,6 @@
 class ProjectWorkerRelationsController < ApplicationController
   before_action :set_project_worker_relation, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_permissions('admin')}
 
   # GET /project_worker_relations
   # GET /project_worker_relations.json
